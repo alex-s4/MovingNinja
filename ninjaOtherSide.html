@@ -21,8 +21,8 @@
 		var numDir = 1;
 
 		var ninjaLoc = {
-			x: 45,
-			y: 10
+			x: 45, // max in full screen: 186
+			y: 10  // max in full screen: 87
 		}
 
     	function update(){
@@ -49,7 +49,7 @@
 				case LEFT_KEY:
 					direction = "left";
 					step();
-					if (ninjaLoc.x <=0) {break}
+					if (ninjaLoc.x <=-2) {ninjaLoc.x = (screenWidth/10) - 6}
 					ninjaLoc.x--;
 					update();
 					break;
@@ -57,7 +57,7 @@
 				case RIGHT_KEY:
 					direction = "right";
 					step();
-					if (ninjaLoc.x >= (screenWidth/10) - 7) {break} // calibrated to avoid the character move further from the screen width
+					if (ninjaLoc.x >= (screenWidth/10) - 7) {ninjaLoc.x = -1} // calibrated to avoid the character move further from the screen width
 					ninjaLoc.x++;
 					update();
 					break;
@@ -65,16 +65,15 @@
 				case DOWN_KEY:
 					direction = "down";
 					step();
-					if (ninjaLoc.y >= (screenHeight/10) - 10) {break} // calibrated to avoid the character move further from the screen height
+					if (ninjaLoc.y >= (screenHeight/10) - 11) {ninjaLoc.y = -2} // calibrated to avoid the character move further from the screen height
 					ninjaLoc.y++;
-					direction = "down";
 					update();
 					break;
 
 				case UP_KEY:
 					direction = "top";
 					step();
-					if (ninjaLoc.y <=0) {break}
+					if (ninjaLoc.y <=-3) {ninjaLoc.y = (screenHeight/10) - 10}
 					ninjaLoc.y--;
 					update();
 					break;
