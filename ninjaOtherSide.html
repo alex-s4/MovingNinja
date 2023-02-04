@@ -1,0 +1,85 @@
+<html>
+<body>
+	<div id='background'>
+        <div id='character' 
+		style=
+			'position:absolute; 
+			top:100px; 
+			left:450px; 
+			background-image: url("img/down1.png"); 
+			width:59px; 
+			height:86px;'>
+		</div>
+    </div>
+    <script type="text/javascript">
+	    var leftValue = 450;
+		var topValue = 100;
+		var screenWidth = document.getElementsByTagName("body")[0].clientWidth;
+		var screenHeight = document.getElementsByTagName("body")[0].clientHeight;
+		var ninja = document.getElementById("character").style;
+		var direction = "down";
+		var numDir = 1;
+
+		var ninjaLoc = {
+			x: 45,
+			y: 10
+		}
+
+    	function update(){
+			ninja.left = `${ninjaLoc.x * 10}px`;
+			ninja.top = `${ninjaLoc.y * 10}px`;
+			
+    	}
+
+		function step(){
+			ninja.backgroundImage = `url('img/${direction}${numDir}.png')`;
+			if (numDir == 1) 
+				numDir = 2 
+			else 
+				numDir = 1
+		}
+
+    	document.onkeydown = function(e){
+			const LEFT_KEY = 37
+			const UP_KEY = 38
+			const RIGHT_KEY = 39
+			const DOWN_KEY = 40
+    		// console.log(e);
+			switch (e.keyCode) {
+				case LEFT_KEY:
+					direction = "left";
+					step();
+					if (ninjaLoc.x <=0) {break}
+					ninjaLoc.x--;
+					update();
+					break;
+
+				case RIGHT_KEY:
+					direction = "right";
+					step();
+					if (ninjaLoc.x >= (screenWidth/10) - 7) {break} // calibrated to avoid the character move further from the screen width
+					ninjaLoc.x++;
+					update();
+					break;
+
+				case DOWN_KEY:
+					direction = "down";
+					step();
+					if (ninjaLoc.y >= (screenHeight/10) - 10) {break} // calibrated to avoid the character move further from the screen height
+					ninjaLoc.y++;
+					direction = "down";
+					update();
+					break;
+
+				case UP_KEY:
+					direction = "top";
+					step();
+					if (ninjaLoc.y <=0) {break}
+					ninjaLoc.y--;
+					update();
+					break;
+			}			
+    	}
+    </script>
+</body>
+</html>
