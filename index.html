@@ -20,9 +20,14 @@
 		var direction = "down";
 		var numDir = 1;
 
+		var ninjaLoc = {
+			x: 45,
+			y: 10
+		}
+
     	function update(){
-			ninja.left = `${leftValue}px`;
-			ninja.top = `${topValue}px`;
+			ninja.left = `${ninjaLoc.x * 10}px`;
+			ninja.top = `${ninjaLoc.y * 10}px`;
 			
     	}
 
@@ -44,24 +49,24 @@
 				case LEFT_KEY:
 					direction = "left";
 					step();
-					if (leftValue <=0) {break}
-					leftValue = leftValue - 10;
+					if (ninjaLoc.x <=0) {break}
+					ninjaLoc.x--;
 					update();
 					break;
 
 				case RIGHT_KEY:
 					direction = "right";
 					step();
-					if (leftValue >= screenWidth - 70) {break} // calibrated to avoid the character move further from the screen width
-					leftValue = leftValue + 10;
+					if (ninjaLoc.x >= (screenWidth/10) - 7) {break} // calibrated to avoid the character move further from the screen width
+					ninjaLoc.x++;
 					update();
 					break;
 
 				case DOWN_KEY:
 					direction = "down";
 					step();
-					if (topValue >= screenHeight - 95) {break} // calibrated to avoid the character move further from the screen height
-					topValue = topValue + 10;
+					if (ninjaLoc.y >= (screenHeight/10) - 10) {break} // calibrated to avoid the character move further from the screen height
+					ninjaLoc.y++;
 					direction = "down";
 					update();
 					break;
@@ -69,8 +74,8 @@
 				case UP_KEY:
 					direction = "top";
 					step();
-					if (topValue <=0) {break}
-					topValue = topValue - 10;
+					if (ninjaLoc.y <=0) {break}
+					ninjaLoc.y--;
 					update();
 					break;
 			}			
